@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>A4 - Alex Lai</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Genealogy web app">
+	<meta name="keywords" content="Genealogy">
+	<meta name="author" content="Alex Lai">
+	<!-- Load jquery, bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
+
+	<!-- Load CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="/style.css">
+	<!-- Custom CSS End -->
+</head>
+
+<body>
+
+	<!-- App title -->
+	<div id='appTitle' class="jumbotron jumbotron-fluid">
+		<div class='container'>
+			<h1 class="display-4">Genealogy App</h1>
+			<p class="lead">Alex Lai CIS*2750 A4</p>
+		</div>
+	</div>
+	
+	<!-- Login popup Modal -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="loginModalLabel">Enter database credentials</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id='loginForm'>
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<label for="userID">User ID</label>
+								<input class="form-control" id="userID" placeholder="Enter username" required>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="userPass">Password</label>
+								<input type="password" class="form-control" id="userPass" placeholder="Password" required>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="dbName">DB Name</label>
+								<input class="form-control" id="dbName" placeholder="Database name" required>
+							</div>
+							<div class="form-group col-md-3">
+								<button id='loginFormBtn' type="submit" class="formBtn btn btn-primary" data-dismiss="modal">Login</button>
+							</div>							
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Database panel -->
+	<div class='panelHolder'>
+
+		<div id="databasePanel">
+			<div class="row tab">
+				<div class="col-md-2">
+					<h3>Database</h3>
+				</div>
+				<div class="col-md-7">
+					<button id="storeFilesBtn" type="submit" class="dbLink hiddenContent">Store All Files</button>
+					<button id="clearDataBtn" type="submit" class="dbLink hiddenContent">Clear All Data</button>
+					<button id="dbStatusBtn" type="submit" class="dbLink hiddenContent">Display DB Status</button>
+					<button id="exeQueryBtn" type="submit" class="dbLink hiddenContent" onclick="openTab(event, 'queryPanel', 'dbTab', 'dbLink')">Execute Query</button>
+				</div>
+				<div class="col-md-3">
+					<button id="loginBtn" type="button" class="formBtn btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+				</div>
+			</div>
+		</div>
+	
+		<!-- Query panel -->
+		<div id='queryPanel' class="tabContent dbTab">	
+			<form>
+				<div class="row">
+					<div class="col-md-2">
+						<label id='querySelectLbl'>Select a query </label>
+					</div>
+					<div class="col-md-7">
+						<div class="input-group">							
+							<select class="custom-select" id="querySelectGroup">
+								<option value="query1" selected>Display all individuals sorted by last name</option>
+								<option value="query2">Display all individuals from a file</option>
+								<option value="query3">Display all individuals of the sex...</option>
+								<option value="query4">Display all individuals with a family size larger than...</option>
+								<option value="query5">Display number of males and females in table</option>
+								<option value="query6">Enter a custom query</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- Help query -->
+					<div class="form-group col-md-1">
+						<button id='helpBtn' class="btn btn-primary" type="button">Help</button>
+					</div>
+
+					<!-- Submit query -->
+					<div class="form-group col-md-1">
+						<button id='execQueryBtn' class="formBtn btn btn-primary" type="button">Query</button>
+					</div>
+					
+				</div>
+
+				<div class="row">
+					
+					<!-- Query 2 -->
+					<div id='query2' class="form-group query-form-holder">
+						<select id="qSelect" class="form-control">
+							<option disabled selected hidden value>select a file</option>
+						</select>
+					</div>
+										
+					<!-- Query 3 -->
+					<div id='query3' class="form-group query-form-holder">
+						<select id="qSexSelect" class="form-control">
+							<option disabled selected hidden value>select sex</option>
+							<option value='M'>Male</option>
+							<option value='F'>Female</option>
+							<option value='U'>Unknown</option>
+						</select>
+					</div>			
+
+					<!-- Query 4 -->
+					<div id='query4' class="form-group query-form-holder">
+						<div class="form-group col-md-3">
+							<label>Enter size: </label>
+						</div>
+						<div class="form-group col-md-9">							
+							<input class="form-control" id="famSizeQuery" type="number" value='0' min="0" required>
+						</div>
+					</div>
+					
+					<!-- Query 6 -->
+					<div id='query6' class="form-group query-form-holder">
+						<input id="customQuery" class="form-control" placeholder="select * from INDIVIDUAL;" type="text" required>
+					</div>					
+
+				</div>					
+			</form>
+
+			<!-- Query Results Table -->
+			<div id='qTableHolder' class="tableHolder">
+				<table id="queryTable" class="table table-bordered">
+					<thead></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+
+	<!-- Status panel -->
+	<div id="statusPanel" class='panelHolder'>
+		<div class="row">
+			<div class="col-md-10">
+				<h3>Status</h3>
+			</div>
+			<div class="col-md-1">
+				<button id="clearBtn" type="button" class="btn btn-primary">clear</button>
+			</div>
+		</div>
+		<div id="statusListBox">
+			<ul id="statusList" class="list-group"></ul>
+		</div>
+	</div>
+
+	<!-- File Panel -->
+	<div class='panelHolder'>
+		
+		<!-- File tab -->
+		<div class="tab">
+			<h3>Files</h3>
+			<button id='fileBtnTab' class="fLink active" onclick="openTab(event, 'fileTab', 'fTab', 'fLink')">File View</button>
+			<button class="fLink" onclick="openTab(event, 'uploadTab', 'fTab', 'fLink')">Upload GEDCOM</button>
+			<button class="fLink" onclick="openTab(event, 'createTab', 'fTab', 'fLink')">Create GEDCOM</button>
+		</div>
+	
+		<!-- File log tab -->
+		<div id='fileTab' class="tabContent fTab active">
+			<div id='fileBox' class="tableHolder">
+				<table id='fileTable' class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Filename</th>
+							<th>Source</th>
+							<th>GEDC Version</th>
+							<th>Encoding</th>
+							<th>Submitter Name</th>
+							<th>Submitter Address</th>
+							<th>Number of individuals</th>
+							<th>Number of families</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	
+		<!-- Upload File Tab -->
+		<div id='uploadTab' class="tabContent fTab">
+			<form id='uploadForm' method='post' ref='uploadForm' encType='multipart/form-data' action='/upload'>
+				<div class="input-group mb-3">
+					<div class="file-field input-field custom-file">
+						<div class="btn">
+							<input type="file" name="uploadFile" id="uploadFile" required>
+						</div>
+					</div>
+					<div class="input-group-append">
+						<button type="submit" class="btn btn-primary" id="submit" onclick="openTab(event, 'fileTab', 'fTab', 'fLink')">Upload</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	
+		<!-- Create GEDCOM Tab -->
+		<div id="createTab" class="tabContent fTab">
+			<form id="createForm">
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="cFilename">File name</label>
+						<input id="cFilename" class="form-control" placeholder="family.ged" type="text" required>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="cSubName">Submitter name</label>
+						<input id="cSubName"class="form-control" placeholder="name" type="text" required>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="cSubAddr">Submitter address</label>
+						<input id="cSubAddr"class="form-control" placeholder="address" type="text" required>
+					</div>							
+				</div>
+	
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="cSource">Source</label>
+						<input id="cSource" class="form-control" placeholder="PAF" type="text" required>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="cGEDC">GEDC version</label>
+						<input id="cGEDC" class="form-control" placeholder="1.0" type="text" required>
+					</div>	
+					<div class="form-group col-md-2">
+						<label for="cEncoding">Encoding</label>
+						<select id="cEncoding" class="form-control">
+							<option selected value="ANSEL">ANSEL</option>
+							<option value="UTF8">UTF8</option>
+							<option value="UNICODE">UNICODE</option>
+							<option value="ASCII">ASCII</option>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<button id='createBtn' type="submit" class="btn btn-primary">Create GEDCOM</button>			
+						<!-- onclick="openTab(event, 'fileTab', 'fTab', 'fLink')" -->
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+
+	<!-- GEDCOM view panel -->
+	<div class='panelHolder'>
+		
+		<!-- individuals tab -->
+		<div class="tab">
+			<h3>Individuals</h3>
+			<button id='indTab' class="vLink active" onclick="openTab(event, 'viewTab', 'vTab', 'vLink')">GEDCOM View</button>
+			<button class="vLink" onclick="openTab(event, 'addTab', 'vTab', 'vLink')">Add Individual</button>
+			<button class="vLink" onclick="openTab(event, 'descTab', 'vTab', 'vLink')">Get Descendants</button>
+			<button class="vLink" onclick="openTab(event, 'ancTab', 'vTab', 'vLink')">Get Ancestors</button>
+		</div>
+	
+		<!-- View panel -->
+		<div id='viewTab' class="tabContent vTab active">
+			<select id="vSelect" class="form-control">
+				<option disabled selected hidden value>select a file</option>
+			</select>
+			<div class="tableHolder">
+				<table id="indTable" class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Given Name</th>
+							<th>Lastname</th>
+							<th>Sex</th>
+							<th>Family Size</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	
+		<!-- Add Individual Tab -->
+		<div id="addTab" class="tabContent vTab">
+			<form id='addForm'>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="addFile">Select a file</label>
+						<select id="addSelect" class="form-control" name="addFile">
+							<option disabled selected hidden value>select an option</option>
+						</select>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="addFirstname">Enter first name</label>
+						<input id="addFirstname" class="form-control" placeholder="first name" type="text" required>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="addSurname">Enter last name</label>
+						<input id="addSurname" class="form-control" placeholder="last name" type="text" required>
+					</div>
+					<div class="form-group col-md-2">
+						<button id='addBtn' type="submit" class="formBtn btn btn-primary">Add Individual</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	
+		<!-- Get Descendants Tab -->
+		<div id="descTab" class="tabContent vTab">
+			<form id="descForm">
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="descFile">Select a file</label>
+						<select id="descSelect" class="form-control" name="descFile">
+							<option disabled selected hidden value>select an option</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="descInd">Select a person</label>
+						<select id="descIndSelect" class="form-control" name="descInd"></select>
+					</div>
+					<div class="form-group col-md-3">
+						<label>Number of generations:</label>
+						<input class="form-control" id="numDesc" type="number" value='0' min="0" required>
+					</div>
+					<div class="col-md-2">
+						<button type="submit" class="btn btn-primary genBtn">Get Descendants</button>
+					</div>
+				</div>
+			</form>
+			<div class="listHolder">
+				<ul id="descList" class="list-group gen-list"></ul>
+			</div>
+		</div>
+	
+		<!-- Get Ancestors Tab -->
+		<div id="ancTab" class="tabContent vTab">
+			<form id="ancForm">
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="ancFile">Select a file</label>
+						<select id="ancSelect" class="form-control" name="ancFile">
+							<option disabled selected hidden value>select an option</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ancInd">Select a person</label>
+						<select id="ancIndSelect" class="form-control" name="ancInd"></select>
+					</div>
+					<div class="form-group col-md-3">
+						<label>Number of generations:</label>
+						<input id="numAnc" class="form-control" type="number" value='0' min="0" required>
+					</div>
+					<div class="col-md-2">
+						<button type="submit" class="btn btn-primary genBtn">Get Ancestors</button>
+					</div>
+				</div>
+			</form>
+			<div class="listHolder">
+				<ul id="ancList" class="list-group gen-list"></ul>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Custom Javascript -->
+	<script type="text/javascript" src="./index.js "></script>
+</body>
+
+</html>

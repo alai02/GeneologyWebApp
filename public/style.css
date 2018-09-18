@@ -1,0 +1,224 @@
+html {
+	width: 75%;
+	height: 100%;
+	min-height: 100%;
+	margin: 0 auto;
+	font-size: 16px;
+	font-family: Helvetica;
+}
+body {
+	height: 100%;
+	min-height: 100%;
+	margin-bottom: 3rem;
+	font-family: Helvetica;
+}
+@media(max-width: 900px) {
+	html {
+		font-size: 14px !important;
+		width: 80% !important;
+	}
+}
+@media(max-width: 480px) {
+	html {
+		font-size: 12px !important;
+		width: 90% !important;
+	}
+}
+@media(max-width: 320px) {
+	html {
+		font-size: 12px !important;
+		width: 100% !important;
+	}
+}
+
+a:link:hover {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	text-decoration: underline;
+	cursor: pointer;
+	cursor: hand;
+}
+ul:empty::after{
+	content: attr(data-empty-message);
+}
+h1 {
+	text-align: center;
+}
+h3 {
+	padding: 0.5em;
+	margin-right: 1em;
+	text-align: left;
+}
+button {
+	outline: none;
+	cursor: pointer;
+	cursor: hand;
+}
+#createBtn {
+	position: absolute;	
+	bottom: 1rem;
+}
+.genBtn {
+	position: absolute;	
+	bottom: 1rem;
+}
+.listHolder {
+	max-height: 10rem;
+    overflow:auto;
+	white-space:nowrap;
+}
+.gen-list {
+	width: 100%;
+	display: inline-grid;
+}
+button::-moz-focus-inner {
+	border: 0;
+}
+
+.tabContent {
+	display: none;
+	border-top: none;
+}
+.tabContent.active {
+	display: block;
+}
+#statusPanel {
+	position: relative;
+}
+#statusListBox {
+	max-height: 10rem;
+	overflow-y: auto;
+}
+#fileBox {
+	padding: 0;
+}
+.tableHolder {
+	max-height: 12rem;
+	height: 12rem;
+	overflow: auto;
+}
+
+input[type=submit], button {
+	cursor: pointer;
+	cursor: hand;
+}
+form {
+	padding: 1rem;
+	position: relative;
+	line-height: 1.5rem;
+	width: 100%;
+	border-radius: 8px;
+	background-color: #4e4e4e;
+}
+input {
+	border: none;
+	outline: none;
+	cursor: pointer;	
+	text-align: center;
+	display: table-cell;	
+	vertical-align: bottom;	
+	border-bottom: 1px solid;
+	color: #ddd;
+}
+label {
+	text-decoration-color: #fff;
+	color: #fff;
+}
+#clearBtn {
+	margin: 0.5rem;	
+	padding: 0.4rem 0.6rem;
+}
+
+.empty-attribute {
+	font-family: Lato-Regular;
+	font-size: 1em;	
+	line-height: 2;
+	display: block;
+	margin-left: 1rem;
+}
+
+.tab {
+	overflow: hidden;
+	border-radius: 8px;
+}
+
+.tab button {
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 0.5rem 0.75rem;
+	transition: 0.3s;
+	background-color: white;
+	border: 1px solid #007bff;
+	border-radius: 8px;
+}
+.tab button:hover {
+	background-color: #007bff;
+}
+.tab button.active {
+	text-decoration: underline #007bff;
+}
+
+#appTitle {
+	padding: 0.5rem;
+	margin-bottom: 0rem;
+	border-radius: 8px;
+	background-color: #007bff;
+}
+
+#uploadTab {
+	border-radius: 8px;
+}
+
+.table {
+	border-radius: 8px;
+	overflow: hidden;
+}
+.table th {
+	font-family: Lato-Bold;
+	font-size: 15px;	
+	line-height: 1.4;
+	text-transform: uppercase;
+}
+.table td {
+	font-family: Lato-Regular;
+	font-size: 15px;
+	line-height: 1.4;
+}
+
+/* *********** A4 Styling *********** */
+
+.hiddenContent {
+	display: none;
+}
+
+#loginBtn {
+	background-color: #007bff;
+	margin: 0.5rem;	
+	padding: 0.4rem 0.6rem;
+}
+
+.modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
+
+.panelHolder {
+	border: 1px solid #007bff;
+	border-radius: 10px;
+}
+.formBtn {
+	bottom: 0;
+	right: 1rem;
+	position: absolute;		
+}
+#querySelectLbl {
+	/* padding-right: 1rem; */
+}
+.query-form-holder {
+	margin-left: 2rem;
+	display: inline-flex;
+	width: 80%;
+}
