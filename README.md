@@ -1,13 +1,11 @@
 
-CIS-2750 - A4
-Name: Alex Lai
-Student Number: 0920158
-Email: alai02@uoguelph.ca
-Given port numbers: 34069, 32988
+# GeneologyWebApp
+
+Geneology web application created using javascript, html and css for the front end UI. Node.JS for the server side API and MySQL as the database. Also uses a C library for GEDCOM manipulation
 
 Install and run instructions: 
-1. Unzip package: A4AlexLai.zip
-2. Navigate to /assign4/parser
+1. Clone project
+2. Navigate to /parser
 3. run 'make' to build the library
 4. cd back to assign4/
 5. run command: 'npm install' to install node packages
@@ -18,9 +16,6 @@ Assumptions:
 - The user of this application has full control of this database and will execute 
 proper queries in the custom query form. 
 
-About the program:
-- A databse has been added to this Geneology application
-
 Features: 
 - This app can upload files to the server and save to database
-- Show current status of database# GeneologyWebApp
+- Show current status of database
