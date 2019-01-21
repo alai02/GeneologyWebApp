@@ -1,7 +1,7 @@
 
 # Genealogy Application
 
-Geneology web application created using javascript, html and css for the front end UI. Node.JS for the server side API and MySQL as the database. Also uses a C library for GEDCOM manipulation. 
+Genealogy web application created using javascript, html and css for the front end UI. Node.JS for the server side API and MySQL as the database. Also uses a C library for GEDCOM manipulation. 
 
 Install and run instructions: 
 1. Clone project
