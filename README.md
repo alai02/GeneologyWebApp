@@ -1,21 +1,19 @@
 
-# Genealogy Application
+# My Genealogy 
 
-Genealogy web application created using javascript, html and css for the front end UI. Node.JS for the server side API and MySQL as the database. Also uses a C library for GEDCOM manipulation. 
+## Description
+  Genealogy web application created using javascript, html and css for the front end UI. Node.JS for the server side API and MySQL as the database. Also uses a C library for GEDCOM manipulation. 
 
-Install and run instructions: 
-1. Clone project
-2. Navigate to /parser
-3. run 'make' to build the library
-4. cd back to assign4/
-5. run command: 'npm install' to install node packages
-6. run command: 'npm run dev [port number]' to start the server on port
-7. open Firefox to url: localhost[port number]
+## Compilation and Usage 
+  1. Clone project
+  2. Run make in parser
+  3. Install packages: npm install
+  4. Run Server: npm run dev [port number] to start the server
+  5. open browser to url: localhost:[port number]
 
-Assumptions: 
-- The user of this application has full control of this database and will execute 
-proper queries in the custom query form. 
+## Assumptions
+  The user of this application has full control of this database and will execute proper queries in the custom query form. 
 
-Features: 
-- This app can upload files to the server and save to database
+## New Features
+- Upload files to the server and save to database
 - Show current status of database
